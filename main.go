@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/arinji2/img-processor/convert"
+	"github.com/arinji2/img-processor/resize"
 )
 
 func main() {
@@ -81,4 +82,16 @@ func main() {
 
 	baseResizeImage := originalFileName + ".webp"
 	fmt.Println("Base Resize Image:", baseResizeImage)
+
+	sizes := map[string]uint{
+		"sm": 480,
+		"md": 768,
+		"lg": 1024,
+		"xl": 1280,
+	}
+
+	err = resize.ResizeWebP(fileName, baseResizeImage, sizes)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
 }
