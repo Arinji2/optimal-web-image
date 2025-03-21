@@ -11,6 +11,8 @@ import (
 )
 
 func main() {
+	fmt.Println("FINISH RUNNING IMAGE PROCESSOR")
+
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: go run . <file-path>")
 		os.Exit(1)
@@ -91,4 +93,7 @@ func main() {
 		fmt.Println("Error:", err)
 		os.Remove(fileLoc)
 	}
+
+	fmt.Println("FINISH RUNNING IMAGE PROCESSOR")
+	fmt.Printf("Files have been saved to %s \n", fileLoc)
 }
