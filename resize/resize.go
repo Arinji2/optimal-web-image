@@ -46,7 +46,6 @@ func ResizeWebP(fileName, inputPath string, sizes map[string]uint) error {
 		}
 
 		outputFile.Close()
-		fmt.Println("Resized and saved:", outputPath)
 	}
 
 	return nil
