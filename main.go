@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/arinji2/img-processor/convert"
 )
 
 func main() {
@@ -39,8 +41,29 @@ func main() {
 		fmt.Println("Error: Failed to create directory:", fileLoc)
 		os.Exit(1)
 	}
-	defer func() {
-		fmt.Println("Removing Created Folder")
-		os.Remove(fileLoc)
-	}()
+	// defer func() {
+	// 	fmt.Println("Removing Created Folder")
+	// 	os.Remove(fileLoc)
+	// }()
+
+	outputPath := filepath.Join(fileLoc, fileName)
+	switch extension {
+	case "png":
+		outputPath = outputPath + ".webp"
+		err = convert.ConvertPNGToWebP(filePath, outputPath)
+		if err != nil {
+			fmt.Println("Error With WEBP:", err)
+			os.Exit(1)
+		}
+	case "webp":
+		outputPath = outputPath + ".png"
+		err = convert.ConvertWebPToPNG(filePath, outputPath)
+		if err != nil {
+			fmt.Println("Error With PNG:", err)
+			os.Exit(1)
+		}
+	default:
+		fmt.Println("Error: Invalid file extension.")
+		os.Exit(1)
+	}
 }
