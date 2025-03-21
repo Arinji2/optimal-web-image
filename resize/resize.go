@@ -5,15 +5,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/kolesa-team/go-webp/encoder"
-	gowebp "github.com/kolesa-team/go-webp/webp"
+	"github.com/chai2010/webp"
 	"github.com/nfnt/resize"
-	"golang.org/x/image/webp"
 )
 
 func ResizeWebP(fileName, inputPath string, sizes map[string]uint) error {
 	file, err := os.Open(inputPath)
-	locationFolder := filepath.Dir(inputPath)
 	if err != nil {
 		return err
 	}
@@ -24,6 +21,8 @@ func ResizeWebP(fileName, inputPath string, sizes map[string]uint) error {
 		return err
 	}
 
+	locationFolder := filepath.Dir(inputPath)
+
 	for sizeName, size := range sizes {
 		resized := resize.Resize(size, 0, img, resize.Lanczos3)
 		outputPath := filepath.Join(locationFolder, fmt.Sprintf("%s_%s.webp", fileName, sizeName))
@@ -33,14 +32,7 @@ func ResizeWebP(fileName, inputPath string, sizes map[string]uint) error {
 			return err
 		}
 
-		options, err := encoder.NewLossyEncoderOptions(encoder.PresetDefault, 95)
-		if err != nil {
-			outputFile.Close()
-			return err
-		}
-
-		err = gowebp.Encode(outputFile, resized, options)
-		if err != nil {
+		if err := webp.Encode(outputFile, resized, &webp.Options{Quality: 95}); err != nil {
 			outputFile.Close()
 			return err
 		}
