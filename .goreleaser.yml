@@ -19,6 +19,6 @@ builds:
       - -X main.commit={{.Commit}} 
       - -X main.date={{.Date}}
     env:
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
 
 
