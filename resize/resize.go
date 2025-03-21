@@ -33,7 +33,7 @@ func ResizeWebP(fileName, inputPath string, sizes map[string]uint) error {
 			return err
 		}
 
-		options, err := encoder.NewLossyEncoderOptions(encoder.PresetDefault, 80)
+		options, err := encoder.NewLossyEncoderOptions(encoder.PresetDefault, 95)
 		if err != nil {
 			outputFile.Close()
 			return err
