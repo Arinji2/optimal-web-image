@@ -35,12 +35,15 @@ jobs:
 
       - name: Install libwebp on Windows
         if: matrix.os == 'windows-latest'
+        shell: pwsh
         run: |
           curl -L https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.3.2-windows-x64.zip -o libwebp.zip
           unzip libwebp.zip -d libwebp
-          # Set environment variables so CGO can locate the headers and library
-          echo "CGO_CFLAGS=-IC:\\libwebp\\libwebp-1.3.2-windows-x64\\include" >> $env:GITHUB_ENV
-          echo "CGO_LDFLAGS=-LC:\\libwebp\\libwebp-1.3.2-windows-x64\\lib -lwebp" >> $env:GITHUB_ENV
+          # Get the current working directory (repository root)
+          $pwd = Get-Location
+          # Set CGO_CFLAGS and CGO_LDFLAGS using the extracted folder's path
+          echo "CGO_CFLAGS=-I$($pwd)\libwebp\libwebp-1.3.2-windows-x64\include" | Out-File -Append -FilePath $env:GITHUB_ENV
+          echo "CGO_LDFLAGS=-L$($pwd)\libwebp\libwebp-1.3.2-windows-x64\lib -lwebp" | Out-File -Append -FilePath $env:GITHUB_ENV
 
       - name: Install dependencies
         run: go mod download
