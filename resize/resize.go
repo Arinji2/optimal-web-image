@@ -33,8 +33,6 @@ func ResizeWebP(fileName, inputPath string, sizes map[string]uint) error {
 			return err
 		}
 
-		// The main issue: webp.Encode doesn't exist in golang.org/x/image/webp
-		// Use the kolesa-team implementation instead
 		options, err := encoder.NewLossyEncoderOptions(encoder.PresetDefault, 80)
 		if err != nil {
 			outputFile.Close()
