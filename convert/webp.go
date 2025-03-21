@@ -7,8 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/kolesa-team/go-webp/encoder"
-	"github.com/kolesa-team/go-webp/webp"
+	"github.com/chai2010/webp"
 )
 
 func ConvertPNGToWebP(inputPath, outputPath string) error {
@@ -29,13 +28,8 @@ func ConvertPNGToWebP(inputPath, outputPath string) error {
 		outputPath += ".webp"
 	}
 
-	options, err := encoder.NewLossyEncoderOptions(encoder.PresetDefault, 80)
-	if err != nil {
-		return fmt.Errorf("error creating encoder options: %w", err)
-	}
-
 	var buf bytes.Buffer
-	if err := webp.Encode(&buf, img, options); err != nil {
+	if err := webp.Encode(&buf, img, &webp.Options{Quality: 80}); err != nil {
 		return fmt.Errorf("error encoding WebP: %w", err)
 	}
 
