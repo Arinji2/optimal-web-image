@@ -1,3 +1,4 @@
+
 name: Run Tests
 on:
   push:
@@ -14,40 +15,21 @@ jobs:
         go-version: ['1.23.5']
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: ${{ matrix.go-version }}
-          cache: true
+    - name: Check out code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-      - name: Install libwebp on Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: sudo apt-get update && sudo apt-get install -y libwebp-dev
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ matrix.go-version}}
+        cache: true
 
-      - name: Install libwebp on macOS
-        if: matrix.os == 'macos-latest'
-        run: brew install webp
+    - name: Install dependencies
+      run: go mod download
 
-      - name: Install MinGW and libwebp on Windows
-        if: matrix.os == 'windows-latest'
-        shell: pwsh
-        run: |
-          choco install mingw
-          curl -L https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.3.2-windows-x64.zip -o libwebp.zip
-          unzip libwebp.zip -d libwebp
-          $pwd = Get-Location
-          echo "CGO_ENABLED=1" | Out-File -Append -FilePath $env:GITHUB_ENV
-          echo "CGO_CFLAGS=-I$($pwd)\libwebp\libwebp-1.3.2-windows-x64\include" | Out-File -Append -FilePath $env:GITHUB_ENV
-          echo "CGO_LDFLAGS=-L$($pwd)\libwebp\libwebp-1.3.2-windows-x64\lib -lwebp" | Out-File -Append -FilePath $env:GITHUB_ENV
-
-      - name: Install dependencies
-        run: go mod download
-
-      - name: Run tests
-        shell: bash
-        run: go test -v ./...
+    - name: Run tests
+      shell: bash
+      run: go test -v ./...
