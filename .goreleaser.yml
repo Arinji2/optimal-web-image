@@ -1,24 +1,41 @@
 version: 2
 
-
 builds:
-  - dir: .
+  - id: img-processor-linux-darwin
+    dir: .
     binary: 'img-process'
     goos:
       - linux
-      - windows
       - darwin
     goarch:
       - amd64
     flags:
       - -trimpath
     ldflags:
-      - -s 
-      - -w 
-      - -X main.version={{.Version}} 
-      - -X main.commit={{.Commit}} 
+      - -s
+      - -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
       - -X main.date={{.Date}}
     env:
       - CGO_ENABLED=1
 
-
+  - id: img-processor-windows
+    dir: .
+    binary: 'img-process'
+    goos:
+      - windows
+    goarch:
+      - amd64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s
+      - -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.Date}}
+    env:
+      - CGO_ENABLED=1
+      - CC=x86_64-w64-mingw32-gcc
+      - CXX=x86_64-w64-mingw32-g++
