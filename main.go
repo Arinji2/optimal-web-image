@@ -32,9 +32,6 @@ func main() {
 	}
 	extension = strings.ReplaceAll(extension, ".", "")
 	fileLoc := filepath.Dir(filePath)
-	fmt.Println("Extension:", extension)
-	fmt.Println("File Name:", fileName)
-	fmt.Println("File Location:", fileLoc)
 	fileLoc = filepath.Join(fileLoc, fileName)
 
 	err := os.Mkdir(fileLoc, 0755)
@@ -42,10 +39,6 @@ func main() {
 		fmt.Println("Error: Failed to create directory:", fileLoc)
 		os.Exit(1)
 	}
-	// defer func() {
-	// 	fmt.Println("Removing Created Folder")
-	// 	os.Remove(fileLoc)
-	// }()
 
 	originalFileName := filepath.Join(fileLoc, fileName)
 	switch extension {
@@ -54,6 +47,7 @@ func main() {
 		err = convert.ConvertPNGToWebP(filePath, convertedPath)
 		if err != nil {
 			fmt.Println("Error With WEBP:", err)
+			os.Remove(fileLoc)
 			os.Exit(1)
 		}
 		originalPath := originalFileName + ".png"
@@ -67,21 +61,23 @@ func main() {
 		err = convert.ConvertWebPToPNG(filePath, convertedPath)
 		if err != nil {
 			fmt.Println("Error With PNG:", err)
+			os.Remove(fileLoc)
 			os.Exit(1)
 		}
 		originalPath := originalFileName + ".webp"
 		err = os.Rename(filePath, originalPath)
 		if err != nil {
 			fmt.Println("Error:", err)
+			os.Remove(fileLoc)
 			os.Exit(1)
 		}
 	default:
 		fmt.Println("Error: Invalid file extension.")
+		os.Remove(fileLoc)
 		os.Exit(1)
 	}
 
 	baseResizeImage := originalFileName + ".webp"
-	fmt.Println("Base Resize Image:", baseResizeImage)
 
 	sizes := map[string]uint{
 		"sm": 480,
@@ -93,5 +89,6 @@ func main() {
 	err = resize.ResizeWebP(fileName, baseResizeImage, sizes)
 	if err != nil {
 		fmt.Println("Error:", err)
+		os.Remove(fileLoc)
 	}
 }
