@@ -46,24 +46,39 @@ func main() {
 	// 	os.Remove(fileLoc)
 	// }()
 
-	outputPath := filepath.Join(fileLoc, fileName)
+	originalFileName := filepath.Join(fileLoc, fileName)
 	switch extension {
 	case "png":
-		outputPath = outputPath + ".webp"
-		err = convert.ConvertPNGToWebP(filePath, outputPath)
+		convertedPath := originalFileName + ".webp"
+		err = convert.ConvertPNGToWebP(filePath, convertedPath)
 		if err != nil {
 			fmt.Println("Error With WEBP:", err)
 			os.Exit(1)
 		}
+		originalPath := originalFileName + ".png"
+		err = os.Rename(filePath, originalPath)
+		if err != nil {
+			fmt.Println("Error:", err)
+			os.Exit(1)
+		}
 	case "webp":
-		outputPath = outputPath + ".png"
-		err = convert.ConvertWebPToPNG(filePath, outputPath)
+		convertedPath := originalFileName + ".png"
+		err = convert.ConvertWebPToPNG(filePath, convertedPath)
 		if err != nil {
 			fmt.Println("Error With PNG:", err)
+			os.Exit(1)
+		}
+		originalPath := originalFileName + ".webp"
+		err = os.Rename(filePath, originalPath)
+		if err != nil {
+			fmt.Println("Error:", err)
 			os.Exit(1)
 		}
 	default:
 		fmt.Println("Error: Invalid file extension.")
 		os.Exit(1)
 	}
+
+	baseResizeImage := originalFileName + ".webp"
+	fmt.Println("Base Resize Image:", baseResizeImage)
 }
