@@ -1,4 +1,3 @@
-
 name: Run Tests
 on:
   push:
@@ -26,6 +25,14 @@ jobs:
       with:
         go-version: ${{ matrix.go-version}}
         cache: true
+
+    - name: Install libwebp-dev on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: sudo apt-get update && sudo apt-get install -y libwebp-dev
+
+    - name: Install libwebp on macOS
+      if: matrix.os == 'macos-latest'
+      run: brew install webp
 
     - name: Install dependencies
       run: go mod download
