@@ -3,7 +3,7 @@ version: 2
 
 builds:
   - dir: .
-    binary: 'Image Processor'
+    binary: 'img-process'
     goos:
       - linux
       - windows
