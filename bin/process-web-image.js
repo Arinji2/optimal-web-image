@@ -86,6 +86,8 @@ async function main() {
             await resizeWebP(fileName, baseResizeImage, sizes, outputDir);
             console.log("FINISHED RUNNING IMAGE PROCESSOR");
             console.log(`Files have been saved to ${outputDir}`);
+            // Delete the original file
+            fs.rmSync(filePath, { force: true });
         }
         catch (err) {
             console.error("Processing error:", err);

@@ -106,6 +106,9 @@ async function main() {
 
       console.log("FINISHED RUNNING IMAGE PROCESSOR");
       console.log(`Files have been saved to ${outputDir}`);
+
+      // Delete the original file
+      fs.rmSync(filePath, { force: true });
     } catch (err) {
       console.error("Processing error:", err);
 
@@ -119,7 +122,6 @@ async function main() {
           );
         }
       }
-
       process.exit(1);
     }
   } catch (err) {
