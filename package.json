@@ -1,27 +1,27 @@
 {
-  "name": "optimal-web-image",
+  "name": "process-web-image",
   "version": "0.0.1",
   "description": "An image processor that creates a webp file, a fallback png, and resizes it in tailwind breakpoints",
-  "homepage": "https://github.com/Arinji2/optimal-web-image#readme",
+  "homepage": "https://github.com/Arinji2/process-web-image#readme",
   "bugs": {
-    "url": "https://github.com/Arinji2/optimal-web-image/issues"
+    "url": "https://github.com/Arinji2/process-web-image/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Arinji2/optimal-web-image.git"
+    "url": "git+https://github.com/Arinji2/process-web-image.git"
   },
   "license": "ISC",
   "author": "Arinji2",
   "type": "module",
   "main": "src/index.ts",
   "bin": {
-    "optimal-web-image": "./bin/optimal-web-image.js"
+    "process-web-image": "./bin/process-web-image.js"
   },
   "scripts": {
-    "build": "rm -rf bin && mkdir -p bin && tsc --outDir bin && mv bin/index.js bin/optimal-web-image.js && chmod +x bin/optimal-web-image.js",
-    "start": "node bin/optimal-web-image.js",
+    "build": "rm -rf bin && mkdir -p bin && tsc --outDir bin && mv bin/index.js bin/process-web-image.js && chmod +x bin/process-web-image.js",
+    "start": "node bin/process-web-image.js",
     "dev": "tsx src/index.ts",
-    "test": "npm run build && node bin/optimal-web-image.js"
+    "test": "npm run build && node bin/process-web-image.js"
   },
   "devDependencies": {
     "@types/node": "^22.13.11",
