@@ -1,6 +1,6 @@
 {
   "name": "process-web-image",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An image processor that creates a webp file, a fallback png, and resizes it in tailwind breakpoints",
   "homepage": "https://github.com/Arinji2/process-web-image#readme",
   "bugs": {
