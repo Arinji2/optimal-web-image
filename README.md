@@ -64,10 +64,15 @@ With `--dump` flag:
 /path/to/image.webp
 /path/to/image.png
 /path/to/image-sm.webp
+
+
 /path/to/image-md.webp
 /path/to/image-lg.webp
 /path/to/image-xl.webp
 ```
+
+## Video Tutorial
+https://github.com/user-attachments/assets/ffd8472c-8a58-4f0e-a9cf-4d60bab99ceb
 
 ## Examples
 
