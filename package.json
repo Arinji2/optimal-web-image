@@ -1,27 +1,27 @@
 {
-  "name": "process-img",
-  "version": "1.0.0",
+  "name": "process-image",
+  "version": "0.0.1",
   "description": "An image processor that creates a webp file, a fallback png, and resizes it in tailwind breakpoints",
-  "homepage": "https://github.com/Arinji2/process-img#readme",
+  "homepage": "https://github.com/Arinji2/process-image#readme",
   "bugs": {
-    "url": "https://github.com/Arinji2/process-img/issues"
+    "url": "https://github.com/Arinji2/process-image/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Arinji2/process-img.git"
+    "url": "git+https://github.com/Arinji2/process-image.git"
   },
   "license": "ISC",
   "author": "Arinji2",
   "type": "module",
   "main": "src/index.ts",
   "bin": {
-    "process-img": "./bin/process-img.js"
+    "process-image": "./bin/process-image.js"
   },
   "scripts": {
-    "build": "rm -rf bin && mkdir -p bin && tsc --outDir bin && mv bin/index.js bin/process-img.js && chmod +x bin/process-img.js",
-    "start": "node bin/process-img.js",
+    "build": "rm -rf bin && mkdir -p bin && tsc --outDir bin && mv bin/index.js bin/process-image.js && chmod +x bin/process-image.js",
+    "start": "node bin/process-image.js",
     "dev": "tsx src/index.ts",
-    "test": "npm run build && node bin/process-img.js"
+    "test": "npm run build && node bin/process-image.js"
   },
   "devDependencies": {
     "@types/node": "^22.13.11",
