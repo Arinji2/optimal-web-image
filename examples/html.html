@@ -1,0 +1,45 @@
+<!-- This is a plain HTML implementation example of process-web-image -->
+<!-- srcLocation -> path/to/image -->
+<!-- Don't pass in the extension; it should only end with the file name -->
+
+<picture>
+  <!-- Source for extra large screens (xl) -->
+  <source
+    media="(min-width: 1280px)"
+    srcset="/path/to/image_xl.webp"
+    type="image/webp"
+  />
+
+  <!-- Source for large screens (lg) -->
+  <source
+    media="(min-width: 1024px)"
+    srcset="/path/to/image_lg.webp"
+    type="image/webp"
+  />
+
+  <!-- Source for medium screens (md) -->
+  <source
+    media="(min-width: 768px)"
+    srcset="/path/to/image_md.webp"
+    type="image/webp"
+  />
+
+  <!-- Source for small screens (sm) -->
+  <source
+    media="(min-width: 640px)"
+    srcset="/path/to/image_sm.webp"
+    type="image/webp"
+  />
+
+  <!-- Base WebP for smaller screens or default when specific sizes aren't needed -->
+  <source srcset="/path/to/image.webp" type="image/webp" />
+
+  <!-- Fallback image for all other cases -->
+  <img
+    src="/path/to/image.png"
+    alt="Alt text for image"
+    width="500"
+    height="300"
+    loading="lazy"
+  />
+</picture>
