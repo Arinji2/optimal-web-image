@@ -20,12 +20,22 @@
   "scripts": {
     "build": "rm -rf bin && mkdir -p bin && tsc --outDir bin && mv bin/index.js bin/process-img.js && chmod +x bin/process-img.js",
     "start": "node bin/process-img.js",
-    "dev": "ts-node src/index.ts",
+    "dev": "tsx src/index.ts",
     "test": "npm run build && node bin/process-img.js"
   },
   "devDependencies": {
     "@types/node": "^22.13.11",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
     "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }
