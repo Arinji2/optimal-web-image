@@ -1,6 +1,6 @@
-# process-img
+# optimal-web-img
 
-**`process-img`** is a simple command-line tool for processing images. It converts PNG images to WebP, generates a fallback PNG, and resizes images for TailwindCSS breakpoints.
+**`optimal-web-img`** is a simple command-line tool for processing images. It converts PNG images to WebP, generates a fallback PNG, and resizes images for TailwindCSS breakpoints.
 
 ## Features
 
@@ -12,14 +12,14 @@
 
 ## Installation & Usage
 
-To use `process-img`, install it via `npx` or `pnpx`:
+To use `optimal-web-img`, install it via `npx` or `pnpx`:
 
 ```sh
-npx process-img
+npx optimal-web-img
 # or
-pnpx process-img
+pnpx optimal-web-img
 # or
-bunx process-img
+bunx optimal-web-img
 ```
 
 ### Processing Images
@@ -27,7 +27,7 @@ bunx process-img
 Provide the path to your PNG image or your WebP image as an argument:
 
 ```sh
-pnpx process-img /path/to/image.png
+pnpx optimal-web-img /path/to/image.png
 ```
 
 This will generate a WebP version, a fallback PNG, and resized images in a folder named after the original image.
@@ -37,7 +37,7 @@ This will generate a WebP version, a fallback PNG, and resized images in a folde
 If you prefer not to create a separate folder and want the processed images to stay in the original location, use the `--dump` flag:
 
 ```sh
-pnpx process-img /path/to/image.png --dump
+pnpx optimal-web-img /path/to/image.png --dump
 ```
 
 ### Output Example
@@ -67,7 +67,7 @@ With `--dump` flag:
 
 ## Hyperlinks
 
-- **NPM**: [process-img](https://www.npmjs.com/package/process-img)
-- **GitHub**: [Arinji2/process-img](https://github.com/Arinji2/img-processor)
+- **NPM**: [optimal-web-img](https://www.npmjs.com/package/optimal-web-img)
+- **GitHub**: [Arinji2/optimal-web-img](https://github.com/Arinji2/img-processor)
 
 For feedback or issues, please open an issue on GitHub.
