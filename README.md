@@ -4,7 +4,7 @@
 
 ## Why does this exist?
 
-I use NextJS a whole bunch, and I love how easy next/image is to use. However, it is also a really big vendor lockin issue which i experienced as soon as i tried out Tanstack Start. The existing solutions require stuff like cdn's.. servers etc. I just wantedan easy way to generate my local images with some nice tailwind breakpoints so i can keep the speed of my images.
+I use NextJS a whole bunch, and I love how easy next/image is to use. However, it is also a really big vendor lockin issue which i experienced as soon as i tried out Tanstack Start. The existing solutions require stuff like cdn's.. servers etc. I just wanted an easy way to generate my local images with some nice tailwind breakpoints so i can keep the speed and acccessibility of images i put on my websites.
 
 ## Features
 
@@ -72,6 +72,7 @@ With `--dump` flag:
 ```
 
 ## Video Tutorial
+
 https://github.com/user-attachments/assets/ffd8472c-8a58-4f0e-a9cf-4d60bab99ceb
 
 ## Examples
