@@ -2,6 +2,10 @@
 
 **`process-web-image`** is a simple command-line tool for processing images. It converts PNG images to WebP, generates a fallback PNG, and resizes images for TailwindCSS breakpoints.
 
+## Why does this exist?
+
+I use NextJS a whole bunch, and I love how easy next/image is to use. However, it is also a really big vendor lockin issue which i experienced as soon as i tried out Tanstack Start. The existing solutions require stuff like cdn's.. servers etc. I just wantedan easy way to generate my local images with some nice tailwind breakpoints so i can keep the speed of my images.
+
 ## Features
 
 - Convert PNG images to WebP format
