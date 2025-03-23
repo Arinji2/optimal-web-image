@@ -2,4 +2,4 @@ examples
 src
 tsconfig.json
 __tests__
-
+tsconfig.tsbuildinfo
