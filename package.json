@@ -13,7 +13,7 @@
   "license": "ISC",
   "author": "Arinji2",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "bin/process-web-image.js",
   "bin": {
     "process-web-image": "./bin/process-web-image.js"
   },
