@@ -3,14 +3,12 @@ import chalk from "chalk";
 import { Command } from "commander";
 import fs from "fs";
 import path from "path";
-import packageJson from "../package.json";
 import { convertPNGToWebP, convertWebPToPNG } from "./convert.js";
 import { resizeWebP } from "./resize.js";
 const program = new Command();
 program
-    .name(packageJson.name)
-    .description(packageJson.description)
-    .version(packageJson.version)
+    .name("process-web-image")
+    .description("An image processor that creates a webp file, a fallback png, and resizes it in tailwind breakpoints")
     .argument("<file-path>", "Path to the image file")
     .option("--dump", "Save files to the current directory instead of creating a new folder")
     .action(async (filePath, options) => {
