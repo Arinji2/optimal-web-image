@@ -1,4 +1,3 @@
-import path from "path";
 import sharp from "sharp";
 
 /**
@@ -13,10 +12,6 @@ export async function convertWebPToPNG(
 ): Promise<void> {
   try {
     console.log(`Converting WebP to PNG: ${inputPath} -> ${outputPath}`);
-
-    if (path.extname(outputPath) !== ".png") {
-      outputPath += ".png";
-    }
 
     await sharp(inputPath).png().toFile(outputPath);
 
@@ -41,10 +36,6 @@ export async function convertPNGToWebP(
 ): Promise<void> {
   try {
     console.log("Starting PNG to WebP conversion");
-
-    if (path.extname(outputPath) !== ".webp") {
-      outputPath += ".webp";
-    }
 
     await sharp(inputPath).webp({ quality: 95 }).toFile(outputPath);
 
