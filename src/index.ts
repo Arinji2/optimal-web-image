@@ -3,16 +3,16 @@
 import { Command } from "commander";
 import fs from "fs";
 import path from "path";
+import packageJson from "../package.json";
 import { convertPNGToWebP, convertWebPToPNG } from "./convert.js";
 import { resizeWebP } from "./resize.js";
 
 const program = new Command();
 
 program
-  .name("process-web-image")
-  .description(
-    "An image processor that creates a webp file, a fallback png, and resizes it in tailwind breakpoints",
-  )
+  .name(packageJson.name)
+  .description(packageJson.description)
+  .version(packageJson.version)
   .argument("<file-path>", "Path to the image file")
   .option(
     "--dump",
