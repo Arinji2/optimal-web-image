@@ -5,5 +5,7 @@ export default {
     "^.+\.tsx?$": ["ts-jest", {}],
   },
   silent: true,
+
+  testPathIgnorePatterns: ["/node_modules/", "/__tests__/helpers/*"],
 };
 
