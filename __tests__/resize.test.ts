@@ -2,22 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import sharp from "sharp";
 import { resizeWebP } from "../src/resize";
-
-async function createTestImage(outputPath: string): Promise<void> {
-  const width = 800;
-  const height = 800;
-  const imageBuffer = await sharp({
-    create: {
-      width,
-      height,
-      channels: 4,
-      background: { r: 0, g: 128, b: 255, alpha: 1 },
-    },
-  })
-    .png()
-    .toBuffer();
-  await fs.writeFile(outputPath, imageBuffer);
-}
+import { createTestImage } from "./helpers/create-image";
 
 describe("resizeWebP", () => {
   const tempDir = path.join(__dirname, "temp");
@@ -31,7 +16,7 @@ describe("resizeWebP", () => {
 
   beforeAll(async () => {
     await fs.ensureDir(tempDir);
-    await createTestImage(path.join(tempDir, "test.png"));
+    await createTestImage(path.join(tempDir, "test.png"), "png");
     await sharp(path.join(tempDir, "test.png"))
       .webp({ quality: 95 })
       .toFile(inputPath);
