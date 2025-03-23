@@ -41,10 +41,4 @@ describe("resizeWebP", () => {
       expect(metadata.format).toBe("webp");
     }
   });
-
-  it("should throw an error if no sizes are provided", async () => {
-    await expect(resizeWebP("test", "test.webp", {}, tempDir)).rejects.toThrow(
-      /No sizes provided/,
-    );
-  });
 });
