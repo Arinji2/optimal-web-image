@@ -12,7 +12,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "outDir": "bin",
-    "rootDir": "./src",
     "declaration": false,
     "isolatedModules": true,
     "noUnusedLocals": false,
