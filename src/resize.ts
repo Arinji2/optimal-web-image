@@ -1,4 +1,3 @@
-import fs from "fs";
 import path from "path";
 import sharp from "sharp";
 
@@ -19,12 +18,11 @@ export async function resizeWebP(
   try {
     console.log(`Starting resize operation for: ${inputPath}`);
 
-    if (!fs.existsSync(inputPath)) {
-      throw new Error(`Input file does not exist: ${inputPath}`);
-    }
-
     const inputImage = sharp(inputPath);
-
+    const length = Object.keys(sizes).length;
+    if (length === 0) {
+      throw new Error("No sizes provided");
+    }
     for (const [sizeName, width] of Object.entries(sizes)) {
       try {
         const outputPath = path.join(outputDir, `${fileName}_${sizeName}.webp`);
