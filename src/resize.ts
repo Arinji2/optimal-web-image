@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import path from "path";
 import sharp from "sharp";
 
@@ -15,38 +16,26 @@ export async function resizeWebP(
   sizes: Record<string, number>,
   outputDir: string,
 ): Promise<void> {
-  try {
-    console.log(`Starting resize operation for: ${inputPath}`);
+  console.log(chalk.yellow(`[→] Starting resizing for: ${inputPath}`));
 
-    const inputImage = sharp(inputPath);
-    const length = Object.keys(sizes).length;
-    if (length === 0) {
-      throw new Error("No sizes provided");
+  const inputImage = sharp(inputPath);
+  for (const [sizeName, width] of Object.entries(sizes)) {
+    try {
+      const outputPath = path.join(outputDir, `${fileName}_${sizeName}.webp`);
+      console.log(
+        chalk.blue(`[ℹ] Resizing to ${sizeName} (${width}px): ${outputPath}`),
+      );
+
+      await inputImage
+        .clone()
+        .resize({ width, kernel: "lanczos3" })
+        .webp({ quality: 95 })
+        .toFile(outputPath);
+
+      console.log(chalk.green(`[✔] Successfully resized to ${sizeName}`));
+    } catch (error) {
+      console.error(chalk.red(`[✘] Failed resizing to ${sizeName}:`), error);
     }
-    for (const [sizeName, width] of Object.entries(sizes)) {
-      try {
-        const outputPath = path.join(outputDir, `${fileName}_${sizeName}.webp`);
-        console.log(`Resizing to ${sizeName} (${width}px): ${outputPath}`);
-
-        await inputImage
-          .clone()
-          .resize({
-            width: width,
-            kernel: "lanczos3",
-          })
-          .webp({ quality: 95 })
-          .toFile(outputPath);
-
-        console.log(`Successfully resized to ${sizeName}`);
-      } catch (sizeError) {
-        console.error(`Error resizing to ${sizeName}:`, sizeError);
-        throw sizeError;
-      }
-    }
-
-    console.log("All resize operations completed successfully");
-  } catch (error) {
-    console.error(`Error in resizeWebP:`, error);
-    throw new Error(`Error resizing WebP: ${(error as Error).message}`);
   }
+  console.log(chalk.green("[✔] All resize operations completed."));
 }

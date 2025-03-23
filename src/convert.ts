@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import sharp from "sharp";
 
 /**
@@ -11,16 +12,12 @@ export async function convertWebPToPNG(
   outputPath: string,
 ): Promise<void> {
   try {
-    console.log(`Converting WebP to PNG: ${inputPath} -> ${outputPath}`);
-
+    console.log(chalk.blue(`[ℹ] Converting WebP to PNG: ${outputPath}`));
     await sharp(inputPath).png().toFile(outputPath);
-
-    console.log(`WebP to PNG conversion complete: ${outputPath}`);
+    console.log(chalk.green("[✔] Succesfully converted to PNG"));
   } catch (error) {
-    console.error(`WebP to PNG conversion error for ${inputPath}:`, error);
-    throw new Error(
-      `Error converting WebP to PNG: ${(error as Error).message}`,
-    );
+    console.error(chalk.red("[✘] Failed to convert WebP to PNG:"), error);
+    throw error;
   }
 }
 
@@ -35,15 +32,11 @@ export async function convertPNGToWebP(
   outputPath: string,
 ): Promise<void> {
   try {
-    console.log("Starting PNG to WebP conversion");
-
+    console.log(chalk.blue(`[ℹ] Converting PNG to WebP: ${outputPath}`));
     await sharp(inputPath).webp({ quality: 95 }).toFile(outputPath);
-
-    console.log("Conversion completed successfully. Output Path:", outputPath);
+    console.log(chalk.green("[✔] Succesfully converted to WebP"));
   } catch (error) {
-    console.error(`PNG to WebP conversion error for ${inputPath}:`, error);
-    throw new Error(
-      `Error converting PNG to WebP: ${(error as Error).message}`,
-    );
+    console.error(chalk.red("[✘] Failed to convert PNG to WebP:"), error);
+    throw error;
   }
 }

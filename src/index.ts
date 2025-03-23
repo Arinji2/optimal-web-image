@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import chalk from "chalk";
 import { Command } from "commander";
 import fs from "fs";
 import path from "path";
@@ -19,10 +20,10 @@ program
     "Save files to the current directory instead of creating a new folder",
   )
   .action(async (filePath, options) => {
-    console.log("STARTING IMAGE PROCESSOR");
+    console.log(chalk.blue("[ℹ] Starting Image Processor..."));
 
     if (!fs.existsSync(filePath)) {
-      console.error("Error: File does not exist.");
+      console.error(chalk.red("[✘] File does not exist."));
       process.exit(1);
     }
 
@@ -30,7 +31,7 @@ program
     const fileName = path.basename(filePath, extension);
 
     if (!extension) {
-      console.error("Error: File has no extension.");
+      console.error(chalk.red("[✘] File has no extension."));
       process.exit(1);
     }
 
@@ -43,14 +44,14 @@ program
         fs.mkdirSync(outputDir, { mode: 0o755 });
         dirCreated = true;
       } catch (err) {
-        console.error("Error: Failed to create directory:", outputDir);
+        console.error(chalk.red("[✘] Failed to create directory:"), outputDir);
         process.exit(1);
       }
     }
 
     const originalFileName = path.join(outputDir, fileName);
     const cleanExtension = extension.replace(".", "");
-
+    console.log(chalk.yellow(`[→] Starting Image Conversions...`));
     try {
       switch (cleanExtension) {
         case "png":
@@ -65,36 +66,27 @@ program
           break;
         default:
           console.error(
-            "Error: Invalid file extension. Only png and webp are supported.",
+            chalk.red(
+              "[✘] Invalid file extension. Only PNG and WebP are supported.",
+            ),
           );
           if (dirCreated)
             fs.rmSync(outputDir, { recursive: true, force: true });
           process.exit(1);
       }
 
+      console.log(chalk.yellow("[→] Starting Resize Operation..."));
       const baseResizeImage = options.dump
         ? filePath
         : `${originalFileName}.webp`;
       const sizes = { sm: 480, md: 768, lg: 1024, xl: 1280 };
       await resizeWebP(fileName, baseResizeImage, sizes, outputDir);
 
-      console.log("FINISHED RUNNING IMAGE PROCESSOR");
-      console.log(`Files have been saved to ${outputDir}`);
-
-      // Delete the original file
-      fs.rmSync(filePath, { force: true });
+      console.log(chalk.green("[✔] Finished Image Processing."));
+      console.log(chalk.magenta(`[✔✔] Files saved to: ${outputDir}`));
     } catch (err) {
-      console.error("Processing error:", err);
-      if (dirCreated) {
-        try {
-          fs.rmSync(outputDir, { recursive: true, force: true });
-        } catch (cleanupErr) {
-          console.error(
-            "Could not remove output directory after error:",
-            cleanupErr,
-          );
-        }
-      }
+      console.error(chalk.red("[✘] Processing error:"), err);
+      if (dirCreated) fs.rmSync(outputDir, { recursive: true, force: true });
       process.exit(1);
     }
   });
